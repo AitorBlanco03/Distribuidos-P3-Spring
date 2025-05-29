@@ -6,7 +6,7 @@
         los juegos dentro de la tienda a través de una interfaz clara e intuitiva.
 
         Autor: Aitor Blanco Fernández - abf1005@alu.ubu.es
-        Versión: 1.0.0 - 29 de mayo de 2025.
+        Versión: 1.1.0 - 29 de mayo de 2025.
     -->
 
     <head>
@@ -95,7 +95,80 @@
             </div>
         </div>
 
-    <!-- Modulo JS para controlar y gestionar el carrusel dentro de la página. -->
-    <script th:src="@{js/popular-genres-carousel.js}"></script>
+        <div class="max-w-7xl mx-auto px-4 relative mt-10">
+            <h2 class="text-2xl font-bold mb-6">More Games to Explore</h2>
+
+            <!-- Panel de búsqueda con filtros para buscar nuevos juegos dentro de la tienda. -->
+            <div class="max-w-7xl mx-auto flex flex-col gap-6">
+                <aside class="w-full bg-[#1b2838] p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold text-white mb-6">Filters</h2>
+
+                    <!-- Barra para buscar el juego usando su nombre como campo. -->
+                    <div class="mb-6">
+                        <label for="search" class="block text-sm text-gray-300 mb-2">Search games</label>
+                        <input
+                                type="text"
+                                id="search"
+                                placeholder="Search..."
+                                class="w-full p-3 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none
+                                focus:ring-2 focus:ring-indigo-600 transition"
+                        />
+                    </div>
+
+                    <!-- Filtros para buscar el juego usando los diferentes genéros a los que pertenece. -->
+                    <div>
+                        <label for="style" class="block text-sm text-gray-300 mb-2">Style</label>
+                        <select id="style"
+                                class="w-full p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2
+                                focus:ring-indigo-600 transition">
+                            <option value="">All</option>
+                            <option value="action">Action</option>
+                            <option value="indie">Indie</option>
+                            <option value="adventure">Adventure</option>
+                            <option value="rpg">RPG</option>
+                            <option value="strategy">Strategy</option>
+                            <option value="shooter">Shooter</option>
+                            <option value="casual">Casual</option>
+                            <option value="sports">Sports</option>
+                            <option value="racing">Racing</option>
+                            <option value="platformer">Platformer</option>
+                        </select>
+                    </div>
+                </aside>
+
+                <!-- Grid para mostrar los juegos disponibles dentro de la tienda. -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Tarjeta para mostrar la información básica del juego. -->
+                    <div class="bg-[#2a475e] rounded-lg overflow-hidden shadow-lg hover:scale-105 transition
+                    transform duration-300 cursor-pointer">
+                        <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/4b4481d8-b0f1-4462-b1d6-de9f5217f857-profile_banner-480.png" />
+                        <div class="p-4">
+                            <h2 class="text-lg text-gray-300 font-semibold truncate">Hollow Knight</h2>
+                            <p class="text-sm text-gray-300 mt-1">€14.79</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Definimos dos controladores para ir a la página anterior o la pagina siguiente. -->
+        <div class="flex justify-end space-x-3 mt-4">
+            <!-- Controlador/Botón para ir a la página anterior. -->
+            <a class="flex items-center justify-center px-3 h-8 text-sm font-medium text-indigo-100 bg-[#2a475e] border border-gray-300 rounded-lg
+           hover:bg-[#2a475e] hover:text-indigo-300">
+                <i class="fas fa-arrow-left me-2 rtl:rotate-180"></i>
+                Anterior
+            </a>
+
+            <!-- Controlador/Botón para ir a la página siguiente. -->
+            <a class="flex items-center justify-center px-3 h-8 text-sm font-medium text-indigo-100 bg-[#2a475e] border border-gray-300 rounded-lg
+           hover:bg-[#2a475e] hover:text-indigo-300">
+                Siguiente
+                <i class="fas fa-arrow-right ms-2 rtl:rotate-180"></i>
+            </a>
+        </div>
+
+        <!-- Modulo JS para controlar y gestionar el carrusel dentro de la página. -->
+        <script th:src="@{js/popular-genres-carousel.js}"></script>
     </body>
 </html>
