@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <!--
+        Página diseñada para mostrar un error 500 en caso de fallos inesperados en la comunicación
+        con la API, con el fin de informar a nuestros usuarios sobre el error.
+
+        Autor: Aitor Blanco Fernández, abf1005@alu.ubu.es
+        Versión: 1.0.0, 30/05/2025
+    -->
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- CDN de TailwindCSS para usar sus estilos sin necesidad de tenerlo instalado. -->
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+
+    <body class="bg-gray-100 h-screen flex items-center justify-center">
+        <div class="text-center">
+            <h1 class="text-9xl font-[impact,sans-serif] text-bold text-indigo-600">500</h1>
+            <p class="text-2xl font-light text-gray-600 mt-4">Oops! Something went wrong</p>
+            <p class="text-gray-500 mt-4 mb-8">We're experiencing an internal server error. Please try again later.</p>
+        </div>
+    </body>
+</html>

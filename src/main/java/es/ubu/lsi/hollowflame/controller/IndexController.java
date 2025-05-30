@@ -50,7 +50,7 @@ public class IndexController {
             mainPage.addAttribute("popularGames", popularGames);
             return "index";
         } catch (Exception e) {
-            return "game-info";
+            return "500-error";
         }
     }
 }
