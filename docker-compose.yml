@@ -1,0 +1,36 @@
+#
+# Docker-Compose para poder gestionar y ejecutar de forma simultánea
+# y sincroniza la aplicación web y la API dentro de Docker.
+#
+# Autor: Aitor Blanco Fernández, abf1005@alu.ubu.es
+# Versión: 1.0.0, 30/05/25.
+#
+
+version: '3.8'
+
+services:
+
+  # Definimos un servicio independiente para gestionar y ejecutar la aplicación web.
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.spring
+    ports:
+      - "8080:8080"
+    networks:
+        - app-network
+
+  # Definimos otro servicio independiente de forma paralela para gestiona y ejecutar la API.
+  flask-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+
+# Por último, definimos e inicializamos una red para gestionar la comunicación entre ambos servicios.
+networks:
+  app-network:
+    driver: bridge
