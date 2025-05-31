@@ -20,8 +20,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
         <!-- Referencia a los estilos personalizados y propios del navbar y carrusel. -->
-        <link rel="stylesheet" th:href="@{css/navbar-style.css}" />
-        <link rel="stylesheet" th:href="@{css/genre-carousel-style.css}" />
+        <link rel="stylesheet" th:href="@{/css/navbar-style.css}" />
+        <link rel="stylesheet" th:href="@{/css/genre-carousel-style.css}" />
     </head>
 
     <body class="bg-gray-100">
@@ -30,14 +30,14 @@
         <header class="bg-gray-900 text-white shadow-lg h-24 hidden md:flex">
             <!-- Logo de la tienda visible dentro del menú de navegación. -->
             <a href="#" class="flex-shrink-0 flex items-center justify-center px-4 lg:px-6 xl:px-6">
-                <img th:src="@{images/Logo.png}" alt="Logo" class="h-12" />
+                <img th:src="@{/images/Logo.png}" alt="Logo" class="h-12" />
             </a>
 
             <!-- Enlaces al resto de páginas de la tienda. -->
             <nav class="header-links contents font-semibold text-base lg:text-lg">
                 <ul class="flex items-center ml-4 xl:ml-8 mr-auto">
                     <li class="px-3 xl:px-6">
-                        <a href="#" class="text-white"><span>Discover</span></a>
+                        <a th:href="@{/}" class="text-white"><span>Discover</span></a>
                     </li>
                     <li class="px-3 xl:px-6 active">
                         <a href="#" class="text-white"><span>Browse</span></a>
@@ -54,32 +54,32 @@
                 <!-- Carrusel para mostrar los géneros más populares de nuestra tienda. -->
                 <div id="genres-carousel" class="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar pr-14">
                     <!-- Tarjetas de género -->
-                    <div class="genre-card">
-                        <img th:src="@{images/action-game-banner.jpg}" />
+                    <div class="genre-card cursor-pointer">
+                        <img th:src="@{/images/action-game-banner.jpg}" />
                         <p class="genre-label">Action</p>
                     </div>
-                    <div class="genre-card">
-                        <img th:src="@{images/adventure-game-banner.jpg}" />
+                    <div class="genre-card cursor-pointer">
+                        <img th:src="@{/images/adventure-game-banner.jpg}" />
                         <p class="genre-label">Adventure</p>
                     </div>
-                    <div class="genre-card">
-                        <img th:src="@{images/casual-game-banner.jpg}" />
+                    <div class="genre-card cursor-pointer">
+                        <img th:src="@{/images/casual-game-banner.jpg}" />
                         <p class="genre-label">Casual</p>
                     </div>
-                    <div class="genre-card">
-                        <img th:src="@{images/indie-game-banner.jpg}" />
+                    <div class="genre-card cursor-pointer">
+                        <img th:src="@{/images/indie-game-banner.jpg}" />
                         <p class="genre-label">Indie</p>
                     </div>
-                    <div class="genre-card">
-                        <img th:src="@{images/rpg-game-banner.jpg}" />
+                    <div class="genre-card cursor-pointer">
+                        <img th:src="@{/images/rpg-game-banner.jpg}" />
                         <p class="genre-label">RPG</p>
                     </div>
-                    <div class="genre-card">
-                        <img th:src="@{images/shooter-game-banner.jpg}" />
+                    <div class="genre-card cursor-pointer">
+                        <img th:src="@{/images/shooter-game-banner.jpg}" />
                         <p class="genre-label">Shooter</p>
                     </div>
-                    <div class="genre-card">
-                        <img th:src="@{images/strategy-game-banner.jpg}" />
+                    <div class="genre-card cursor-pointer">
+                        <img th:src="@{/images/strategy-game-banner.jpg}" />
                         <p class="genre-label">Strategy</p>
                     </div>
                 </div>
@@ -139,34 +139,39 @@
                 <!-- Grid para mostrar los juegos disponibles dentro de la tienda. -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     <!-- Tarjeta para mostrar la información básica del juego. -->
-                    <div class="bg-[#2a475e] rounded-lg overflow-hidden shadow-lg hover:scale-105 transition
-                    transform duration-300 cursor-pointer">
-                        <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/4b4481d8-b0f1-4462-b1d6-de9f5217f857-profile_banner-480.png" />
+                    <div th:each="game : ${games}"
+                         class="bg-[#2a475e] rounded-lg overflow-hidden shadow-lg hover:scale-105
+                         transition transform duration-300 cursor-pointer">
+                        <img th:src="${game.coverURL}"/>
                         <div class="p-4">
-                            <h2 class="text-lg text-gray-300 font-semibold truncate">Hollow Knight</h2>
-                            <p class="text-sm text-gray-300 mt-1">€14.79</p>
+                            <h2 class="text-lg text-gray-300 font-semibold truncate" th:text="${game.name}">Game Title</h2>
+                            <p class="text-indigo-400 font-bold mt-1" th:text="${game.price}">€0.00</p>
                         </div>
                     </div>
+                </div>
+
+                <!-- Definimos dos controladores para ir a la página anterior o la pagina siguiente. -->
+                <div class="flex justify-end space-x-3 mt-4 cursor-pointer">
+                    <!-- Controlador/Botón para ir a la página anterior. -->
+                    <a th:if="${previousPage != null}" th:href="@{/games/previous}" class="flex items-center
+           justify-center px-3 h-8 text-sm font-medium text-indigo-100 bg-[#2a475e] border border-gray-300 rounded-lg
+           hover:bg-[#2a475e] hover:text-indigo-300">
+                        <i class="fas fa-arrow-left me-2 rtl:rotate-180"></i>
+                        Previous
+                    </a>
+
+                    <!-- Controlador/Botón para ir a la página siguiente. -->
+                    <a th:if="${nextPage != null}" th:href="@{/games/next}" class="flex items-center
+            justify-center px-3 h-8 text-sm font-medium text-indigo-100 bg-[#2a475e] border border-gray-300 rounded-lg
+           hover:bg-[#2a475e] hover:text-indigo-300">
+                        Next
+                        <i class="fas fa-arrow-right ms-2 rtl:rotate-180"></i>
+                    </a>
                 </div>
             </div>
         </div>
 
-        <!-- Definimos dos controladores para ir a la página anterior o la pagina siguiente. -->
-        <div class="flex justify-end space-x-3 mt-4">
-            <!-- Controlador/Botón para ir a la página anterior. -->
-            <a class="flex items-center justify-center px-3 h-8 text-sm font-medium text-indigo-100 bg-[#2a475e] border border-gray-300 rounded-lg
-           hover:bg-[#2a475e] hover:text-indigo-300">
-                <i class="fas fa-arrow-left me-2 rtl:rotate-180"></i>
-                Previous
-            </a>
 
-            <!-- Controlador/Botón para ir a la página siguiente. -->
-            <a class="flex items-center justify-center px-3 h-8 text-sm font-medium text-indigo-100 bg-[#2a475e] border border-gray-300 rounded-lg
-           hover:bg-[#2a475e] hover:text-indigo-300">
-                Next
-                <i class="fas fa-arrow-right ms-2 rtl:rotate-180"></i>
-            </a>
-        </div>
 
         <!-- Modulo JS para controlar y gestionar el carrusel dentro de la página. -->
         <script th:src="@{js/genres-carousel.js}"></script>

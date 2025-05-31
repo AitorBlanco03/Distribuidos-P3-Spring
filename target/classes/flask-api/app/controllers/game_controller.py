@@ -129,3 +129,50 @@ def get_user_recommendations(api_key, len=50):
     else:
         # En caso de error, devolvemos un mensaje informativo.
         return {"error": "Error al obtener las recomendaciones del usuario."}
+
+
+def get_games_paginated(api_key, page=1, len=50):
+    """
+    Obtiene todos los juegos disponibles en la API de forma paginada, junto a
+    la página anterior y la página siguiente.
+
+    Parámetros:
+    ------------
+    api_key: str
+        Clave de acceso a la API.
+    page: int
+        Número de la página que se desea obtener.
+    len: int
+        Número de páginas que se desea mostrar por página.
+    
+    Returns:
+    ---------
+    Información de la página solicitada junto a la información de la página anterior
+    y la página siguiente.
+    """
+    # Definimos la URL y los parámetros para realizar la petición a la API.
+    url = "https://api.rawg.io/api/games"
+    params = {
+        "key": api_key,
+        "platforms": 4,
+        "page": page,
+        "page_size": len
+    }
+
+    # Obtenemos la respuesta de la API y la procesamos para obtener los campos que nos interesa.
+    response = requests.get(url, params=params)
+    if response.status_code != 200:
+        return {"error": "Error al obtener juegos de la página."}
+    
+    # Obtenemos los datos de los juegos asociados a esa página.
+    games = response.json()["results"]
+    games_list = [{ "raw_name": game["slug"],
+                    "name": game["name"],
+                    "cover": game["background_image"],
+                    "price": "$50.00"} for game in games]
+
+    return {
+        "previous": response.json()["previous"],
+        "games_list": games_list,
+        "next": response.json()["next"]
+    }        

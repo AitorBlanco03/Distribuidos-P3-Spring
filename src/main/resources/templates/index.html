@@ -39,7 +39,7 @@
                         <a href="#" class="text-white"><span>Discover</span></a>
                     </li>
                     <li class="px-3 xl:px-6">
-                        <a href="#" class="text-white"><span>Browse</span></a>
+                        <a th:href="@{games}" class="text-white"><span>Browse</span></a>
                     </li>
                 </ul>
             </nav>
@@ -55,7 +55,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <!-- Tarjetas para mostrar los los últimos juegos lanzados. -->
                 <div th:each="game : ${latestReleases}" class="bg-[#2a475e] p-4 rounded shadow transition duration-300
-                transform hover:scale-105 hover:shadow-lg">
+                transform hover:scale-105 hover:shadow-lg cursor-pointer">
                     <img th:src="${game.coverURL}" alt="" class="w-full h-40 object-cover rounded" />
                     <h3 class="text-lg text-white font-semibold mt-4" th:text="${game.name}">Game Name</h3>
                     <p class="text-indigo-400 font-bold" th:text="${game.price}">$0.00</p>
@@ -73,7 +73,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <!-- Tarjetas para mostrar los los juegos recomendados según los gustos del usuario. -->
                 <div th:each="game : ${userRecommendations}" class="bg-[#2a475e] p-4 rounded shadow
-                transition duration-300 transform hover:scale-105 hover:shadow-lg">
+                transition duration-300 transform hover:scale-105 hover:shadow-lg cursor-pointer">
                     <img th:src="${game.coverURL}" alt="" class="w-full h-40 object-cover rounded" />
                     <h3 class="text-lg text-white font-semibold mt-4" th:text="${game.name}">Game Name</h3>
                     <p class="text-indigo-400 font-bold" th:text="${game.price}">$0.00</p>
@@ -91,7 +91,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 <!-- Tarjetas para mostrar llos juegos más populares dentro de la tienda. -->
                 <div th:each="game : ${popularGames}" class="bg-[#2a475e] p-4 rounded shadow
-                transition duration-300 transform hover:scale-105 hover:shadow-lg">
+                transition duration-300 transform hover:scale-105 hover:shadow-lg cursor-pointer">
                     <img th:src="${game.coverURL}" alt="" class="w-full h-40 object-cover rounded" />
                     <h3 class="text-lg text-white font-semibold mt-4" th:text="${game.name}">Game Name</h3>
                     <p class="text-indigo-400 font-bold" th:text="${game.price}">$0.00</p>
