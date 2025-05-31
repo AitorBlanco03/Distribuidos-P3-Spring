@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
  * básica disponible de un juego dentro de nuestra tienda.
  *
  * @author Aitor Blanco Fernández, abf1005@alu.ubu.es
- * @version 1.0.0, 30/05/2025
+ * @version 1.1.0, 31/05/2025
  */
 
 @Getter
@@ -32,4 +32,7 @@ public class GameInfoDTO {
 
     // Precio actual del juego dentro de la tienda.
     private String price;
+
+    // Detalles más especificos del juego dentro de la tienda.
+    private GameDetailsDTO details;
 }

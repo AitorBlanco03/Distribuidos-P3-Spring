@@ -52,7 +52,7 @@ public class PopularGamesService {
                 String coverURL = gameInfoNode.get("cover").asText("");
                 String price = gameInfoNode.get("price").asText("");
 
-                GameInfoDTO gameInfo = new GameInfoDTO(rawName, name, coverURL, price);
+                GameInfoDTO gameInfo = new GameInfoDTO(rawName, name, coverURL, price, null);
                 popularGames.add(gameInfo);
             }
             return  popularGames;

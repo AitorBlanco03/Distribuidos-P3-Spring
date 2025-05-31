@@ -16,7 +16,7 @@ import java.util.List;
  * y páginada desde la API.
  *
  * @author Aitor Blanco Fernández, abf1005@alu.ubu.es
- * @version 1.0.0, 30/05/2025
+ * @version 1.1.0, 31/05/2025
  */
 
 @Slf4j
@@ -63,7 +63,7 @@ public class GamePageService {
                 String coverURL = gameNode.get("cover").asText("");
                 String price = gameNode.get("price").asText("");
 
-                GameInfoDTO gameInfo = new GameInfoDTO(rawName, name, coverURL, price);
+                GameInfoDTO gameInfo = new GameInfoDTO(rawName, name, coverURL, price, null);
                 gamesInfo.add(gameInfo);
             }
             return new GamePageDTO(previousPage, nextPage, gamesInfo);

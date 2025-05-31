@@ -1,0 +1,3 @@
+# Definimos las librerías y dependencias para ejecutar la API.
+Flask
+requests

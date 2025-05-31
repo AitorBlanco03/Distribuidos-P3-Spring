@@ -57,7 +57,7 @@ public class RecommendedGamesService {
                 String coverURL = gameInfoNode.get("cover").asText("");
                 String price = gameInfoNode.get("price").asText("");
 
-                GameInfoDTO gameInfo = new GameInfoDTO(rawName, name, coverURL, price);
+                GameInfoDTO gameInfo = new GameInfoDTO(rawName, name, coverURL, price, null);
                 userRecommendations.add(gameInfo);
             }
 
