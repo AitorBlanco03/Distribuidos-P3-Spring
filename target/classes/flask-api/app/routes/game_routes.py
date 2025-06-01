@@ -2,12 +2,13 @@
 Define las rutas asociadas para obtener la información de los juegos.
 
     - Autor: Aitor Blanco Fernández, abf1005@alu.ubu.es.
-    - Versión: 1.2.0, 30/05/2025
+    - Versión: 1.3.0, 01/06/2025
 """
 
 from flask import Blueprint, jsonify, current_app, request
 from app.controllers.game_lookup_controller import get_latest_releases, get_popular_games
 from app.controllers.game_lookup_controller import get_user_recommendations, get_games_paginated
+from app.controllers.game_info_controller import search_game
 
 
 # Blueprint para obtener toda la información disponible de los juegos.
@@ -55,3 +56,16 @@ def paginated_games():
         return get_games_paginated(api_key, page)
     except:
         return {"error": "Error al obtener juegos de la página."}
+    
+
+# Registramos la ruta para obtener la información y detalles del juego pasado en la ruta.
+@games_bp.route("/games/<string:gameID>", methods=['GET'])
+def get_game_info(gameID):
+    try:
+        # Obtenemos la clave de la API para hacer las peticiones.
+        api_key = current_app.config["API_KEY"]
+
+        # Buscamos el juego en la API y extraemos su información.
+        return search_game(api_key, gameID)
+    except:
+        return {"error": f"Error al obtener el juego '{gameID}'"}

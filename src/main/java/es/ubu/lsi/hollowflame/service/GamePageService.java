@@ -4,7 +4,6 @@ import es.ubu.lsi.hollowflame.dto.GameInfoDTO;
 import es.ubu.lsi.hollowflame.dto.GamePageDTO;
 import es.ubu.lsi.hollowflame.exception.GamePageException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -16,10 +15,9 @@ import java.util.List;
  * y páginada desde la API.
  *
  * @author Aitor Blanco Fernández, abf1005@alu.ubu.es
- * @version 1.1.0, 31/05/2025
+ * @version 1.2.0, 01/06/2025
  */
 
-@Slf4j
 @Service
 public class GamePageService {
 

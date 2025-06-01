@@ -1,7 +1,7 @@
 package es.ubu.lsi.hollowflame.exception;
 
 /**
- * Excepción personaliza para controlar y gestionar los posibles errores
+ * Excepción personalizada para controlar y gestionar los posibles errores
  * al obtener los juegos de forma páginada.
  *
  * @author Aitor Blanco Fernández, abf1005@alu.ubu.es
