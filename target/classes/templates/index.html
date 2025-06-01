@@ -1,102 +1,109 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
-    <!--
-        Página principal de la tienda, diseñada para mostrar los últimos lanzamientos así
-        como los juegos más populares. Además, se encarga de ofrecer recomendaciones basadas
-        en los gustos de los usuarios.
+<!--
+    Página principal de la tienda, diseñada para mostrar los últimos lanzamientos así
+    como los juegos más populares. Además, se encarga de ofrecer recomendaciones basadas
+    en los gustos de los usuarios.
 
-        Autor: Aitor Blanco Fernández - abf1005@alu.ubu.es
-        Versión: 1.1.0 - 30 de Mayo de 2025.
-    -->
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    Autor: Aitor Blanco Fernández - abf1005@alu.ubu.es
+    Versión: 1.1.0 - 30 de Mayo de 2025.
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <!-- CDN para usar los estilos y diseños de TailwindCSS sin necesidad de instalarlo. -->
-        <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CDN para usar los estilos y diseños de TailwindCSS sin necesidad de instalarlo. -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        <!-- CDN para usar los estilos y diseños de Font Awesome sin necesidad de instalarlo. -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- CDN para usar los estilos y diseños de Font Awesome sin necesidad de instalarlo. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        <!-- Referencia a los estilos personalizados y propios del navbar y carrusel. -->
-        <link rel="stylesheet" th:href="@{css/navbar-style.css}">
-    </head>
+    <!-- Referencia a los estilos personalizados y propios del navbar y carrusel. -->
+    <link rel="stylesheet" th:href="@{css/navbar-style.css}">
+</head>
 
-    <body class="bg-gray-100">
+<body class="bg-gray-100">
 
-        <!-- Menú de navegación principal que contiene los diferentes enlaces al resto de páginas. -->
-        <header class="bg-gray-900 text-white shadow-lg h-24 hidden md:flex">
-            <!-- Logo de la tienda visible dentro del menú de navegación. -->
-            <a href="#" class="flex-shrink-0 flex items-center justify-center px-4 lg:px-6 xl:px-6">
-                <img th:src="@{images/Logo.png}" alt="Logo" class="h-12" />
-            </a>
+<!-- Menú de navegación principal que contiene los diferentes enlaces al resto de páginas. -->
+<header class="bg-gray-900 text-white shadow-lg h-24 hidden md:flex">
+    <!-- Logo de la tienda visible dentro del menú de navegación. -->
+    <a th:href="@{/}" class="flex-shrink-0 flex items-center justify-center px-4 lg:px-6 xl:px-6">
+        <img th:src="@{images/Logo.png}" alt="Logo" class="h-12" />
+    </a>
 
-            <!-- Enlaces al resto de páginas de la tienda. -->
-            <nav class="header-links contents font-semibold text-base lg:text-lg">
-                <ul class="flex items-center ml-4 xl:ml-8 mr-auto">
-                    <li class="px-3 xl:px-6 active">
-                        <a href="#" class="text-white"><span>Discover</span></a>
-                    </li>
-                    <li class="px-3 xl:px-6">
-                        <a th:href="@{games}" class="text-white"><span>Browse</span></a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+    <!-- Enlaces al resto de páginas de la tienda. -->
+    <nav class="header-links contents font-semibold text-base lg:text-lg">
+        <ul class="flex items-center ml-4 xl:ml-8 mr-auto">
+            <li class="px-3 xl:px-6 active">
+                <a th:href="@{/}" class="text-white"><span>Discover</span></a>
+            </li>
+            <li class="px-3 xl:px-6">
+                <a th:href="@{games}" class="text-white"><span>Browse</span></a>
+            </li>
+        </ul>
+    </nav>
+</header>
 
-        <!-- Zona de la página para mostrar los últimos lanzamientos dentro de la tienda. -->
-        <div class="p-8">
-            <h2 class="text-3xl font-bold mb-6 text-left">
-                Latest Releases <i class="fas fa-chevron-right"></i>
-            </h2>
+<!-- Zona de la página para mostrar los últimos lanzamientos dentro de la tienda. -->
+<div class="p-8">
+    <h2 class="text-3xl font-bold mb-6 text-left">
+        Latest Releases <i class="fas fa-chevron-right"></i>
+    </h2>
 
-            <!-- Grid para mostrar una pincelada de los últimos juegos lanzados. -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Tarjetas para mostrar los los últimos juegos lanzados. -->
-                <div th:each="game : ${latestReleases}" class="bg-[#2a475e] p-4 rounded shadow transition duration-300
+    <!-- Grid para mostrar una pincelada de los últimos juegos lanzados. -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Tarjetas para mostrar los los últimos juegos lanzados. -->
+        <div th:each="game : ${latestReleases}" class="bg-[#2a475e] p-4 rounded shadow transition duration-300
                 transform hover:scale-105 hover:shadow-lg cursor-pointer">
-                    <img th:src="${game.coverURL}" alt="" class="w-full h-40 object-cover rounded" />
-                    <h3 class="text-lg text-white font-semibold mt-4" th:text="${game.name}">Game Name</h3>
-                    <p class="text-indigo-400 font-bold" th:text="${game.price}">$0.00</p>
-                </div>
-            </div>
+            <a th:href="@{/games/{id}(id=${game.rawName})}" class="block">
+                <img th:src="${game.coverURL}" alt="" class="w-full h-40 object-cover rounded" />
+                <h3 class="text-lg text-white font-semibold mt-4" th:text="${game.name}">Game Name</h3>
+                <p class="text-indigo-400 font-bold" th:text="${game.price}">$0.00</p>
+            </a>
         </div>
+    </div>
+</div>
 
-        <!-- Zona de la página para mostrar los juegos recomendados según los gustos del usuario. -->
-        <div class="p-8">
-            <h2 class="text-3xl font-bold mb-6 text-left">
-                Discover Something New <i class="fas fa-chevron-right"></i>
-            </h2>
+<!-- Zona de la página para mostrar los juegos recomendados según los gustos del usuario. -->
+<div class="p-8">
+    <h2 class="text-3xl font-bold mb-6 text-left">
+        Discover Something New <i class="fas fa-chevron-right"></i>
+    </h2>
 
-            <!-- Grid para mostrar una pincelada de los juegos recomendados según los gustos del usuario. -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Tarjetas para mostrar los los juegos recomendados según los gustos del usuario. -->
-                <div th:each="game : ${userRecommendations}" class="bg-[#2a475e] p-4 rounded shadow
+    <!-- Grid para mostrar una pincelada de los juegos recomendados según los gustos del usuario. -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Tarjetas para mostrar los los juegos recomendados según los gustos del usuario. -->
+        <div th:each="game : ${userRecommendations}" class="bg-[#2a475e] p-4 rounded shadow
                 transition duration-300 transform hover:scale-105 hover:shadow-lg cursor-pointer">
-                    <img th:src="${game.coverURL}" alt="" class="w-full h-40 object-cover rounded" />
-                    <h3 class="text-lg text-white font-semibold mt-4" th:text="${game.name}">Game Name</h3>
-                    <p class="text-indigo-400 font-bold" th:text="${game.price}">$0.00</p>
-                </div>
-            </div>
+            <a th:href="@{/games/{id}(id=${game.rawName})}" class="block">
+                <img th:src="${game.coverURL}" alt="" class="w-full h-40 object-cover rounded" />
+                <h3 class="text-lg text-white font-semibold mt-4" th:text="${game.name}">Game Name</h3>
+                <p class="text-indigo-400 font-bold" th:text="${game.price}">$0.00</p>
+            </a>
         </div>
+    </div>
+</div>
 
-        <!-- Zona de la página para mostrar los juegos más populares dentro de la tienda. -->
-        <div class="p-8">
-            <h2 class="text-3xl font-bold mb-6 text-left">
-                Trending Games <i class="fas fa-chevron-right"></i>
-            </h2>
+<!-- Zona de la página para mostrar los juegos más populares dentro de la tienda. -->
+<div class="p-8">
+    <h2 class="text-3xl font-bold mb-6 text-left">
+        Trending Games <i class="fas fa-chevron-right"></i>
+    </h2>
 
-            <!-- Grid para mostrar una pincelada de los juegos más populares dentro de la tienda. -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Tarjetas para mostrar llos juegos más populares dentro de la tienda. -->
-                <div th:each="game : ${popularGames}" class="bg-[#2a475e] p-4 rounded shadow
-                transition duration-300 transform hover:scale-105 hover:shadow-lg cursor-pointer">
-                    <img th:src="${game.coverURL}" alt="" class="w-full h-40 object-cover rounded" />
-                    <h3 class="text-lg text-white font-semibold mt-4" th:text="${game.name}">Game Name</h3>
-                    <p class="text-indigo-400 font-bold" th:text="${game.price}">$0.00</p>
-                </div>
-            </div>
+    <!-- Grid para mostrar una pincelada de los juegos más populares dentro de la tienda. -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Tarjetas para mostrar llos juegos más populares dentro de la tienda. -->
+        <div th:each="game : ${popularGames}"
+             class="bg-[#2a475e] p-4 rounded shadow
+            transition duration-300 transform hover:scale-105 hover:shadow-lg cursor-pointer">
+            <a th:href="@{/games/{id}(id=${game.rawName})}" class="block">
+                <img th:src="${game.coverURL}" alt="" class="w-full h-40 object-cover rounded" />
+                <h3 class="text-lg text-white font-semibold mt-4" th:text="${game.name}">Game Name</h3>
+                <p class="text-indigo-400 font-bold" th:text="${game.price}">$0.00</p>
+            </a>
         </div>
-    </body>
+    </div>
+</div>
+</body>
 </html>

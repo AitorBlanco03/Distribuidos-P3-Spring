@@ -31,7 +31,7 @@ def get_latest_releases(api_key, len=4):
     """
     # Calculamos el rango de fechas, teniendo como base el día actual.
     current_day = datetime.today().strftime("%Y-%m-%d")
-    start_day = current_day = datetime.today().strftime("%Y-%m-%d")
+    start_day = (datetime.today()- timedelta(days=30)).strftime("%Y-%m-%d")
 
     # Definimos la URL y los parámetros necesarios para realizar la petición.
     url = "https://api.rawg.io/api/games"

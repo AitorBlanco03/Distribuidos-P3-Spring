@@ -98,55 +98,19 @@
         <div class="max-w-7xl mx-auto px-4 relative mt-10">
             <h2 class="text-2xl font-bold mb-6">More Games to Explore</h2>
 
-            <!-- Panel de búsqueda con filtros para buscar nuevos juegos dentro de la tienda. -->
-            <div class="max-w-7xl mx-auto flex flex-col gap-6">
-                <aside class="w-full bg-[#1b2838] p-6 rounded-lg shadow-md">
-                    <h2 class="text-xl font-semibold text-white mb-6">Filters</h2>
-
-                    <!-- Barra para buscar el juego usando su nombre como campo. -->
-                    <div class="mb-6">
-                        <label for="search" class="block text-sm text-gray-300 mb-2">Search games</label>
-                        <input
-                                type="text"
-                                id="search"
-                                placeholder="Search..."
-                                class="w-full p-3 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none
-                                focus:ring-2 focus:ring-indigo-600 transition"
-                        />
-                    </div>
-
-                    <!-- Filtros para buscar el juego usando los diferentes genéros a los que pertenece. -->
-                    <div>
-                        <label for="genre" class="block text-sm text-gray-300 mb-2">Genre</label>
-                        <select id="genre"
-                                class="w-full p-3 rounded bg-gray-700 text-white focus:outline-none focus:ring-2
-                                focus:ring-indigo-600 transition">
-                            <option value="">All</option>
-                            <option value="action">Action</option>
-                            <option value="indie">Indie</option>
-                            <option value="adventure">Adventure</option>
-                            <option value="rpg">RPG</option>
-                            <option value="strategy">Strategy</option>
-                            <option value="shooter">Shooter</option>
-                            <option value="casual">Casual</option>
-                            <option value="sports">Sports</option>
-                            <option value="racing">Racing</option>
-                            <option value="platformer">Platformer</option>
-                        </select>
-                    </div>
-                </aside>
-
                 <!-- Grid para mostrar los juegos disponibles dentro de la tienda. -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     <!-- Tarjeta para mostrar la información básica del juego. -->
                     <div th:each="game : ${games}"
                          class="bg-[#2a475e] rounded-lg overflow-hidden shadow-lg hover:scale-105
                          transition transform duration-300 cursor-pointer">
-                        <img th:src="${game.coverURL}"/>
-                        <div class="p-4">
-                            <h2 class="text-lg text-gray-300 font-semibold truncate" th:text="${game.name}">Game Title</h2>
-                            <p class="text-indigo-400 font-bold mt-1" th:text="${game.price}">€0.00</p>
-                        </div>
+                        <a th:href="@{/games/{id}(id=${game.rawName})}" class="block">
+                            <img th:src="${game.coverURL}"/>
+                            <div class="p-4">
+                                <h2 class="text-lg text-gray-300 font-semibold truncate" th:text="${game.name}">Game Title</h2>
+                                <p class="text-indigo-400 font-bold mt-1" th:text="${game.price}">€0.00</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
 
