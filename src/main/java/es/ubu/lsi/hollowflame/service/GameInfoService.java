@@ -44,7 +44,7 @@ public class GameInfoService {
             String response = restTemplate.getForObject(API_URL, String.class);
             JsonNode responseJSON = objectMapper.readTree(response);
 
-            // Comprobamos que no habido ningun error a la hora de obtener los últimos lanzamientos desde la API.
+            // Comprobamos que no habido ningun error.
             if (responseJSON.has("error")) {
                 throw new GameInfoException();
             }

@@ -43,7 +43,7 @@ public class RecommendedGamesService {
             String response = restTemplate.getForObject(API_URL, String.class);
             JsonNode responseJSON = objectMapper.readTree(response);
 
-            // Comprobamos que no ha habido ningún error a la hora de obtener los últimos lanzamientos desde la API.
+            // Comprobamos que no ha habido ningún error.
             if (responseJSON.has("error")) {
                 throw new RecommendedGamesException();
             }
