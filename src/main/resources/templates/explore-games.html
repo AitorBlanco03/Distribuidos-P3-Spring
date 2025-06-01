@@ -55,32 +55,46 @@
                 <div id="genres-carousel" class="flex gap-6 overflow-x-auto scroll-smooth no-scrollbar pr-14">
                     <!-- Tarjetas de género -->
                     <div class="genre-card cursor-pointer">
-                        <img th:src="@{/images/action-game-banner.jpg}" />
-                        <p class="genre-label">Action</p>
+                        <a th:href="@{/genres/action}" style="text-decoration: none; display: block;">
+                            <img th:src="@{/images/action-game-banner.jpg}" />
+                            <p class="genre-label">Action</p>
+                        </a>
                     </div>
                     <div class="genre-card cursor-pointer">
-                        <img th:src="@{/images/adventure-game-banner.jpg}" />
-                        <p class="genre-label">Adventure</p>
+                        <a th:href="@{/genres/adventure}" style="text-decoration: none; display: block;">
+                            <img th:src="@{/images/adventure-game-banner.jpg}" />
+                            <p class="genre-label">Adventure</p>
+                        </a>
                     </div>
                     <div class="genre-card cursor-pointer">
-                        <img th:src="@{/images/casual-game-banner.jpg}" />
-                        <p class="genre-label">Casual</p>
+                        <a th:href="@{/genres/casual}" style="text-decoration: none; display: block;">
+                            <img th:src="@{/images/casual-game-banner.jpg}" />
+                            <p class="genre-label">Casual</p>
+                        </a>
                     </div>
                     <div class="genre-card cursor-pointer">
-                        <img th:src="@{/images/indie-game-banner.jpg}" />
-                        <p class="genre-label">Indie</p>
+                        <a th:href="@{/genres/casual}" style="text-decoration: none; display: block;">
+                            <img th:src="@{/images/indie-game-banner.jpg}" />
+                            <p class="genre-label">Indie</p>
+                        </a>
                     </div>
                     <div class="genre-card cursor-pointer">
-                        <img th:src="@{/images/rpg-game-banner.jpg}" />
-                        <p class="genre-label">RPG</p>
+                        <a th:href="@{/genres/role-playing-games-rpg}" style="text-decoration: none; display: block;">
+                            <img th:src="@{/images/rpg-game-banner.jpg}" />
+                            <p class="genre-label">RPG</p>
+                        </a>
                     </div>
                     <div class="genre-card cursor-pointer">
-                        <img th:src="@{/images/shooter-game-banner.jpg}" />
-                        <p class="genre-label">Shooter</p>
+                        <a th:href="@{/genres/shooter}" style="text-decoration: none; display: block;">
+                            <img th:src="@{/images/shooter-game-banner.jpg}" />
+                            <p class="genre-label">Shooter</p>
+                        </a>
                     </div>
                     <div class="genre-card cursor-pointer">
-                        <img th:src="@{/images/strategy-game-banner.jpg}" />
-                        <p class="genre-label">Strategy</p>
+                        <a th:href="@{/genres/strategy}" style="text-decoration: none; display: block;">
+                            <img th:src="@{/images/strategy-game-banner.jpg}" />
+                            <p class="genre-label">Strategy</p>
+                        </a>
                     </div>
                 </div>
 
