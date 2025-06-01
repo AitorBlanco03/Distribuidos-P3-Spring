@@ -7,6 +7,7 @@ dentro de nuestra API.
 """
 
 from app.routes.game_routes import games_bp
+from app.routes.genre_routes import genres_bp
 
 def register_routes(app):
     """
@@ -20,3 +21,4 @@ def register_routes(app):
         la API que podrán a llegar a ser consumidas.
     """
     app.register_blueprint(games_bp, url_prefix="/api")
+    app.register_blueprint(genres_bp, url_prefix="/api")
