@@ -41,6 +41,27 @@ public class AuthController {
      */
     @GetMapping("/register")
     public String showSignUpForm(Model signUpPage) {
+        signUpPage.addAttribute("signUpForm", new SignUpFormDTO());
         return "signup";
+    }
+
+    /**
+     * Controla y gestiona el registro de un nuevo usuario en la tienda.
+     *
+     * @param signUpForm Formulario de registro de nuevos usuarios.
+     * @return Nombre de la vista que se debe actualizar/renderizar por pantalla.
+     */
+    @PostMapping("/register")
+    public String registerUser(@ModelAttribute("signUpForm") SignUpFormDTO signUpForm,
+                               Model model) {
+        // Comprobamos que las contraseñas coinciden dentro del formulario de registro.
+        if (!signUpForm.getPassword().equals(signUpForm.getConfirmPassword())) return "signup";
+
+        // Comprobamos que el email del usuario ingresado no esta en uso dentro del sistema.
+        if (userService.existsEmail(signUpForm.getEmail())) return "signup";
+
+        // Registramos al usuario en el sistema y en la base de datos.
+        userService.registerUser(signUpForm);
+        return "redirect:/";
     }
 }

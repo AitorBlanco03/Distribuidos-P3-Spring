@@ -33,10 +33,10 @@
                 </div>
 
                 <!-- Definimos el formulario para permitir el registro de nuevos usuarios. -->
-                <form class="space-y-6">
+                <form th:action="@{/register}" method="post" th:object="${signUpForm}" class="space-y-6">
                     <!-- Campo para introducir el nombre completo del nuevo usuario. -->
                     <div class="relative">
-                        <input type="text" id="name" name="name" required placeholder=""
+                        <input type="text" id="name" name="name" th:field="*{name}" required placeholder=""
                                class="peer w-full border border-gray-300 text-gray-900 rounded-md px-4 pt-6 pb-2
                                        text-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
                         <label for="name"
@@ -48,7 +48,7 @@
 
                     <!-- Campo para introducir el email/correo del nuevo usuario. -->
                     <div class="relative">
-                        <input type="email" id="email" name="email" required placeholder=""
+                        <input type="email" id="email" name="email" th:field="*{email}" required placeholder=""
                                class="peer w-full border border-gray-300 text-gray-900 rounded-md px-4 pt-6 pb-2
                                        text-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
                         <label for="email"
@@ -60,7 +60,7 @@
 
                     <!-- Campo para introducir la contraseña para el nuevo usuario. -->
                     <div class="relative">
-                        <input type="password" id="password" name="password" required placeholder=""
+                        <input type="password" id="password" name="password" th:field="*{password}" required placeholder=""
                                class="peer w-full border border-gray-300 text-gray-900 rounded-md px-4 pt-6 pb-2
                                text-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
                         <label for="password"
@@ -72,7 +72,7 @@
 
                     <!-- Campo para confirmar la contraseña para el nuevo usuario. -->
                     <div class="relative">
-                        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder=""
+                        <input type="password" id="confirmPassword" name="confirmPassword" th:field="*{confirmPassword}" required placeholder=""
                                class="peer w-full border border-gray-300 text-gray-900 rounded-md px-4 pt-6 pb-2
                                         text-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" />
                         <label for="confirmPassword"

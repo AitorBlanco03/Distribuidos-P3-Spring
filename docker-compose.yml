@@ -22,10 +22,10 @@ services:
     depends_on:
       - mysql-db
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/hollowflame?useSSL=false&serverTimezone=UTC
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/hollowflame?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: password
-      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
 
   # Definimos un servicio independiente para gestionar y ejecutar la API.
   flask-api:
