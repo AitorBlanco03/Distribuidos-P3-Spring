@@ -37,7 +37,7 @@ public class GenrePageService {
      */
     public GenrePageDTO getGenrePage(String genreName, int pageNumber) {
         // Definimos la URL de la API para realizar la correspondiente petición.
-        String API_URL = "http://localhost:5000/api/by-genre?genre=" +
+        String API_URL = "http://flask-api:5000/api/by-genre?genre=" +
                 genreName + "&page=" + pageNumber;
 
         try {

@@ -33,7 +33,7 @@ public class GameInfoService {
      */
     public static GameInfoDTO getGameInfo(String gameID) {
         // Definimos la URL de la API para realizar la correspondiente solicitud.
-        String API_URL = "http://localhost:5000/api/games/" + gameID;
+        String API_URL = "http://flask-api:5000/api/games/" + gameID;
 
         // Instanciamos los objetos necesarios para trabajar con la API y procesar sus respuestas.
         RestTemplate restTemplate = new RestTemplate();

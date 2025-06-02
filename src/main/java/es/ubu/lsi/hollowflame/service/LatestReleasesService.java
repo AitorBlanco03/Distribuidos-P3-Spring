@@ -33,7 +33,7 @@ public class LatestReleasesService {
      */
     public List<GameInfoDTO> getLatestReleases() {
         // Definimos la URL de la API para realizar la correspondiente petición.
-        String API_URL = "http://localhost:5000/api/latest-releases";
+        String API_URL = "http://flask-api:5000/api/latest-releases";
 
         // Lista que se encarga de registrar la información de los ultimos lanzamientos.
         List<GameInfoDTO> latestReleases = new ArrayList<>();

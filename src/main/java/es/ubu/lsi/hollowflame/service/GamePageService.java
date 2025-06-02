@@ -35,7 +35,7 @@ public class GamePageService {
      */
     public GamePageDTO getGamePage(int pageNumber) {
         // Definimos la URL de la API para realizar la correspondiente petición.
-        String API_URL = "http://localhost:5000/api/games?page=" + pageNumber;
+        String API_URL = "http://flask-api:5000/api/games?page=" + pageNumber;
 
         try {
             // Realizamos una petición a la API para obtener los datos de esa página.

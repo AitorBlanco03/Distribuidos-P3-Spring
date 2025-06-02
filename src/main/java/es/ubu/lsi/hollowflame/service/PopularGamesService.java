@@ -30,7 +30,7 @@ public class PopularGamesService {
      */
     public List<GameInfoDTO> getPopularGames() {
         // Definimos la URL de la API para realizar la petición correspondiente.
-        String API_URL = "http://localhost:5000/api/popular-games";
+        String API_URL = "http://flask-api:5000/api/popular-games";
 
         // Lista encargada de registrar la información de los juegos más populares.
         List<GameInfoDTO> popularGames = new ArrayList<>();

@@ -33,7 +33,7 @@ public class RecommendedGamesService {
      */
     public List<GameInfoDTO> getUserRecommendations() {
         // Definimos la URL de la API para realizar la correspondiente petición.
-        String API_URL = "http://localhost:5000/api/recommend-games";
+        String API_URL = "http://flask-api:5000/api/recommend-games";
 
         // Lista que se encarga de recoger las recomendaciones personalizadas para cada uno de los usuarios.
         List<GameInfoDTO> userRecommendations = new ArrayList<>();
