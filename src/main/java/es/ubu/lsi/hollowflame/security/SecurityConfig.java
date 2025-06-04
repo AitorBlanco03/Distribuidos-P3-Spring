@@ -31,7 +31,6 @@ public class SecurityConfig {
         http
                 // Definimos las rutas públicas y privadas dentro de la aplicación.
                 .authorizeHttpRequests(autorization -> autorization
-                        .requestMatchers("/shopping-cart").authenticated()
                         .anyRequest().permitAll()
                 )
 

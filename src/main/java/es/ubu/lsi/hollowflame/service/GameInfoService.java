@@ -55,6 +55,7 @@ public class GameInfoService {
             String rawName = gameInfoNode.get("raw_name").asText("");
             String name = gameInfoNode.get("name").asText("");
             String description = gameInfoNode.get("description").asText();
+            String cover = gameInfoNode.get("cover").asText("");
             int reviewsCount = gameInfoNode.get("reviews_count").asInt();
             float rating = (float) gameInfoNode.get("rating").asDouble();
             String minRequirements = gameInfoNode.get("requirements_min").asText();
@@ -71,7 +72,7 @@ public class GameInfoService {
             GameDetailsDTO gameDetails = new GameDetailsDTO(reviewsCount, rating, description,
                     trailer, screenshotUrls, minRequirements, recommendedRequirements);
 
-            GameInfoDTO gameInfo = new GameInfoDTO(rawName, name, null, "$50.00", gameDetails);
+            GameInfoDTO gameInfo = new GameInfoDTO(rawName, name, cover, "$50.00", gameDetails);
             return gameInfo;
         } catch (GameInfoException e) {
             throw e;

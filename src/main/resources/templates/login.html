@@ -33,10 +33,10 @@
                 </div>
 
                 <!-- Definimos y mostramos el formulario de inicio sesión con sus correspondientes campos. -->
-                <form class="space-y-6">
+                <form th:action="@{/login}" method="post" th:object="${loginForm}" class="space-y-6">
                     <!-- Campo para introducir el email del usuario. -->
                     <div class="relative">
-                        <input type="email" id="email" placeholder="" required
+                        <input type="email" id="email" placeholder="" required th:field="*{email}"
                                class="peer w-full border border-gray-300 text-gray-900 rounded-md px-4 pt-6 pb-2
                                        text-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"/>
                         <label for="email"
@@ -48,7 +48,7 @@
 
                     <!-- Campo para introducir la contraseña del usuario. -->
                     <div class="relative">
-                        <input type="password" id="password" placeholder="" required
+                        <input type="password" id="password" placeholder="" required th:field="*{password}"
                                class="peer w-full border border-gray-300 text-gray-900 rounded-md
                                px-4 pt-6 pb-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500
                                focus:border-indigo-500"/>

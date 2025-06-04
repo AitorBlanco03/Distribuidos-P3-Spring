@@ -10,7 +10,7 @@
         eliminar productos, regresar a la tienda o continuar con el pago.
 
         Autor: Aitor Blanco Fernández, abf1005@alu.ubu.es
-        Version: 1.0.0, 02/06/2025
+        Version: 1.1.0, 03/06/2025
     -->
 
     <head>
@@ -45,20 +45,25 @@
                         </thead>
 
                         <tbody>
-                            <tr class="text-center border-b border-gray-200">
+                            <tr th:each="game : ${cart.getGameList()}" class="text-center border-b border-gray-200">
                                 <!-- Definimos los campos que representan los juegos y su precio dentro del carrito. -->
                                 <td class="px-2 py-4 text-left">
-                                    <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg?t=1695270428"
-                                         class="w-35 h-20 inline-block mr-2" />
-                                    <span class="align-middle text-white">Hollow Knight</span>
+                                    <img th:src="${game.coverURL}" alt="" class="w-36 h-20 inline-block mr-2" />
+                                    <span class="align-middle text-white" th:text="${game.name}">Game Name</span>
                                 </td>
-                                <td class="px-2 py-4 text-white">$50.00</td>
+                                <td class="px-2 py-4 text-white" th:text="${game.price}">$00.00</td>
                                 <!-- Campos vacios para mantener la estructura de la tabla. -->
                                 <td class="px-2 py-4"></td>
                                 <td class="px-2 py-4"></td>
                                 <!-- Definimos el icono que permite eliminar un juego del carrito. -->
                                 <td class="px-2 py-4">
-                                    <i class="fas fa-times-circle text-gray-300 hover:text-red-500 cursor-pointer text-xl"></i>
+                                    <form th:action="@{/shopping-cart/remove}" method="post" style="display:inline;">
+                                        <input type="hidden" name="gameName" th:value="${game.rawName}"/>
+                                        <button type="submit" style="all: unset; cursor: pointer;">
+                                            <i class="fas fa-times-circle text-gray-300 hover:text-red-500
+                                            cursor-pointer text-xl"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         </tbody>
@@ -67,9 +72,11 @@
                             <!-- Definimos un botón que nos permite volver atrás y seguir añadiendo juegos al carrito. -->
                             <tr class="border-t border-gray-300">
                                 <td class="px-2 py-4" colspan="3"></td>
-                                <td class="px-2 py-4" colspan="2">
-                                    <button class="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full
+                                <td class="px-2 py-4 text-right" colspan="2">
+                                    <form th:action="@{/}" method="get">
+                                        <button class="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full
                                     text-sm font-semibold">Back</button>
+                                    </form>
                                 </td>
                             </tr>
                         </tfoot>
@@ -83,14 +90,16 @@
                     <!-- Total a pagar por el usuario. -->
                     <div class="py-3 flex justify-between text-white">
                         <span>Total:</span>
-                        <span class="font-semibold">$50.00</span>
+                        <span class="font-semibold" th:text="${cart.getTotal()}">$00.00</span>
                     </div>
 
                     <!-- Botón para continuar y proceder con el pago. -->
-                    <button class="w-full text-white mt-5 px-10 py-4 bg-indigo-600 hover:bg-indigo-700
+                    <form th:action="@{/shopping-cart/purchase}" method="post">
+                        <button class="w-full text-white mt-5 px-10 py-4 bg-indigo-600 hover:bg-indigo-700
                     rounded-full text-base font-semibold">
-                        Purchase
-                    </button>
+                            Purchase
+                        </button>
+                    </form>
                 </div>
 
             </div>

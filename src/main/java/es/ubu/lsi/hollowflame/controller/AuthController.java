@@ -1,10 +1,14 @@
 package es.ubu.lsi.hollowflame.controller;
 
 import es.ubu.lsi.hollowflame.dto.SignUpFormDTO;
+import es.ubu.lsi.hollowflame.dto.LoginFormDTO;
+import es.ubu.lsi.hollowflame.dto.ShoppingCartDTO;
+import es.ubu.lsi.hollowflame.model.User;
 import es.ubu.lsi.hollowflame.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
  * registro de usuarios dentro del sistema y la base de datos.
  *
  * @author Aitor Blanco Fernández, abf1005@alu.ubu.es
- * @version 1.0.0, 02/06/2025
+ * @version 1.1.0, 02/06/2025
  */
 
 @Controller
@@ -30,6 +34,7 @@ public class AuthController {
      */
     @GetMapping("/login")
     public String showSignInForm(Model signInPage) {
+        signInPage.addAttribute("loginForm", new LoginFormDTO());
         return "login";
     }
 
@@ -45,6 +50,28 @@ public class AuthController {
         return "signup";
     }
 
+
+    /**
+     * Controla y gestiona el inicio de sesión en la tienda.
+     *
+     * @param loginForm Formulario de inicio de sesión.
+     * @return Nombre de la vista que se debe actualizar/renderizar por pantalla.
+     */
+    @PostMapping("/login")
+    public String loginUser(@ModelAttribute("loginForm") LoginFormDTO loginForm,
+                            Model model, HttpSession session) {
+        // Comprobamos si las credenciales ingresadas son válidas y corresponden a un usuario.
+        User user = userService.logIn(loginForm.getEmail(), loginForm.getPassword());
+
+        // Si no son válidas, el volvemos a enseñar formulario de inicio de sesión.
+        if (user == null) return "login";
+
+        session.setAttribute("user", user);
+        session.setAttribute("cart", new ShoppingCartDTO());
+        return "redirect:/";
+    }
+
+
     /**
      * Controla y gestiona el registro de un nuevo usuario en la tienda.
      *
@@ -53,7 +80,7 @@ public class AuthController {
      */
     @PostMapping("/register")
     public String registerUser(@ModelAttribute("signUpForm") SignUpFormDTO signUpForm,
-                               Model model) {
+                               Model model, HttpSession session) {
         // Comprobamos que las contraseñas coinciden dentro del formulario de registro.
         if (!signUpForm.getPassword().equals(signUpForm.getConfirmPassword())) return "signup";
 
@@ -61,7 +88,9 @@ public class AuthController {
         if (userService.existsEmail(signUpForm.getEmail())) return "signup";
 
         // Registramos al usuario en el sistema y en la base de datos.
-        userService.registerUser(signUpForm);
+        User user = userService.registerUser(signUpForm);
+        session.setAttribute("user", user);
+        session.setAttribute("cart", new ShoppingCartDTO());
         return "redirect:/";
     }
 }

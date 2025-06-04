@@ -3,7 +3,7 @@ Controlador que se encarga de obtener la información y los detalles
 de un juego desde la API.
 
     - Autor: Aitor Blanco Fernández, abf1005@alu.ubu.es
-    - Versión: 1.0.0, 31/05/2025
+    - Versión: 1.1.0, 31/05/2025
 """
 
 import requests
@@ -43,6 +43,7 @@ def search_game(api_key, gameID):
     raw_name = gameInfo['slug']
     name = gameInfo['name']
     description = clean_description(gameInfo['description_raw'])
+    cover = gameInfo["background_image"]
     rating = gameInfo['rating']
     num_reviews = gameInfo['reviews_count']
 
@@ -61,6 +62,7 @@ def search_game(api_key, gameID):
         'raw_name': raw_name,
         'name': name,
         'description': description,
+        'cover': cover,
         'rating': rating,
         'reviews_count': num_reviews,
         'requirements_min': minimum_req,

@@ -48,15 +48,15 @@ public class UserService {
      * Registra un nuevo usuario dentro del sistema y la base de datos.
      *
      * @param form Formulario con los datos ingresados de ese nuevo usuario.
-     * @return true si el usuario ha sido registrado correctamente en el sistema, false
+     * @return El usuario ha sido registrado correctamente en el sistema, null
      *          en caso contrario.
      */
-    public boolean registerUser(SignUpFormDTO form) {
+    public User registerUser(SignUpFormDTO form) {
         // Comprobamos que si el email ya se encuentra en uso.
-        if (existsEmail(form.getEmail())) return false;
+        if (existsEmail(form.getEmail())) return null;
 
         // Comprobamos si ambas contraseñas coinciden dentro del formulario.
-        if (!form.getPassword().equals(form.getConfirmPassword())) return false;
+        if (!form.getPassword().equals(form.getConfirmPassword())) return null;
 
         // Creamos un nuevo usuario dentro del sistema.
         User user = new User();
@@ -68,6 +68,6 @@ public class UserService {
 
         // Guardamos el usuario en el sistema y base de datos.
         userRepository.save(user);
-        return true;
+        return user;
     }
 }

@@ -10,7 +10,7 @@
     para poder jugarlo.
 
     Autor: Aitor Blanco Fernández - abf1005@alu.ubu.es
-    Versión: 1.1.0 - 01 de junio de 2025.
+    Versión: 1.2.0 - 03 de junio de 2025.
 -->
 
 <head>
@@ -106,10 +106,17 @@
 
       <!-- Botones para añadir el juego al carrito de la compra y/o a la lista de deseados. -->
       <div class="flex space-x-4 mb-6">
-        <button class="bg-indigo-600 flex gap-2 items-center text-white px-6 py-2 rounded-md hover:bg-indigo-700
+        <form th:action="@{/shopping-cart/add}" method="post">
+          <input type="hidden" name="rawName" th:value="${gameInfo.rawName}" />
+          <input type="hidden" name="name" th:value="${gameInfo.name}" />
+          <input type="hidden" name="coverURL" th:value="${gameInfo.coverURL}" />
+          <input type="hidden" name="price" th:value="${gameInfo.price}" />
+          <button type="submit" class="bg-indigo-600 flex gap-2 items-center text-white px-6 py-2 rounded-md hover:bg-indigo-700
                                 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-          <i class="fas fa-shopping-cart"></i>Add to Cart
-        </button>
+            <i class="fas fa-shopping-cart"></i>Add to Cart
+          </button>
+        </form>
+      </div>
 
         <button class="bg-gray-200 flex gap-2 items-center text-gray-800 px-6 py-2 rounded-md hover:bg-gray-300
                                     focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
