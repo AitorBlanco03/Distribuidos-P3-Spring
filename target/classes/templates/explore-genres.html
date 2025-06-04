@@ -1,93 +1,95 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
-    <!--
-        Página diseñada con el próposito de facilitar a los usuarios la búsqueda de
-        los juegos dentro de la tienda a través de su género.
+<!--
+    Página diseñada con el próposito de facilitar a los usuarios la búsqueda de
+    los juegos dentro de la tienda a través de su género.
 
-        Autor: Aitor Blanco Fernández - abf1005@alu.ubu.es
-         Versión: 1.0.0 - 01 de junio de 2025.
-    -->
+    Autor: Aitor Blanco Fernández - abf1005@alu.ubu.es
+     Versión: 1.1.0 - 01 de junio de 2025.
+-->
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <!-- CDN para usar los estilos y diseños de TailwindCSS sin necesidad de instalarlo. -->
-        <script src="https://cdn.tailwindcss.com"></script>
+    <!-- CDN para usar los estilos y diseños de TailwindCSS sin necesidad de instalarlo. -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        <!-- CDN para usar los estilos y diseños de Font Awesome sin necesidad de instalarlo. -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- CDN para usar los estilos y diseños de Font Awesome sin necesidad de instalarlo. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        <!-- Referencia a los estilos personalizados y propios del navbar y carrusel. -->
-        <link rel="stylesheet" th:href="@{/css/navbar-style.css}" />
-    </head>
+    <!-- Referencia a los estilos personalizados y propios del navbar y carrusel. -->
+    <link rel="stylesheet" th:href="@{/css/navbar-style.css}" />
+</head>
 
-    <body class="bg-gray-100">
+<body class="bg-gray-100">
 
-        <!-- Menú de navegación principal que contiene los diferentes enlaces al resto de páginas. -->
-        <header class="bg-gray-900 text-white shadow-lg h-24 hidden md:flex">
-            <!-- Logo de la tienda visible dentro del menú de navegación. -->
-            <a th:href="@{/}" class="flex-shrink-0 flex items-center justify-center px-4 lg:px-6 xl:px-6">
-                <img th:src="@{/images/Logo.png}" alt="Logo" class="h-12" />
-            </a>
+<!-- Menú de navegación principal que contiene los diferentes enlaces al resto de páginas. -->
+<header class="bg-gray-900 text-white shadow-lg h-24 hidden md:flex">
+    <!-- Logo de la tienda visible dentro del menú de navegación. -->
+    <a th:href="@{/}" class="flex-shrink-0 flex items-center justify-center px-4 lg:px-6 xl:px-6">
+        <img th:src="@{/images/Logo.png}" alt="Logo" class="h-12" />
+    </a>
 
-            <!-- Enlaces al resto de páginas de la tienda. -->
-            <nav class="header-links contents font-semibold text-base lg:text-lg">
-                <ul class="flex items-center ml-4 xl:ml-8 mr-auto">
-                    <li class="px-3 xl:px-6">
-                        <a th:src="@{/}" class="text-white"><span>Discover</span></a>
-                    </li>
-                    <li class="px-3 xl:px-6 active">
-                        <a th:src="@{/games}" class="text-white"><span>Browse</span></a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
+    <!-- Enlaces al resto de páginas de la tienda. -->
+    <nav class="header-links contents font-semibold text-base lg:text-lg">
+        <ul class="flex items-center ml-4 xl:ml-8 mr-auto">
+            <li class="px-3 xl:px-6">
+                <a th:href="@{/}" class="text-white"><span>Discover</span></a>
+            </li>
+            <li class="px-3 xl:px-6 active">
+                <a th:href="@{/games}" class="text-white"><span>Browse</span></a>
+            </li>
+        </ul>
+    </nav>
+</header>
 
-        <div class="max-w-7xl mx-auto px-4 relative mt-10">
-            <h2 class="text-2xl font-bold mb-6">
-                Discover Your Next Favorite Game
-            </h2>
-            <p class="text-lg mb-6 text-gray-600">
-                Looking for the best in <span th:text="${genre}"></span> games? You've come to the right place! Explore our diverse collection of
-                top-rated <span th:text="${genre}"></span> titles that offer endless fun, excitement, and adventure.
-            </p>
+<div class="max-w-7xl mx-auto px-4 relative mt-10">
+    <h2 class="text-2xl font-bold mb-6">
+        Discover Your Next Favorite Game
+    </h2>
+    <p class="text-lg mb-6 text-gray-600">
+        Looking for the best in <span th:text="${genre}"></span> games? You've come to the right place! Explore our diverse collection of
+        top-rated <span th:text="${genre}"></span> titles that offer endless fun, excitement, and adventure.
+    </p>
 
-            <!-- Grid para mostrar los juegos disponibles para ese género de la tienda. -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Tarjeta para mostrar la información básica del juego. -->
-                <div th:each="game : ${games}"
-                     class="bg-[#2a475e] rounded-lg overflow-hidden shadow-lg hover:scale-105
+    <!-- Grid para mostrar los juegos disponibles para ese género de la tienda. -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Tarjeta para mostrar la información básica del juego. -->
+        <div th:each="game : ${games}"
+             class="bg-[#2a475e] rounded-lg overflow-hidden shadow-lg hover:scale-105
                              transition transform duration-300 cursor-pointer">
-                    <a th:href="@{/games/{id}(id=${game.rawName})}" class="block">
-                        <img th:src="${game.coverURL}" />
-                        <div class="p-4">
-                            <h2 class="text-lg text-gray-300 font-semibold truncate" th:text="${game.name}">Game Title</h2>
-                            <p class="text-indigo-400 font-bold mt-1" th:text="${game.price}">€0.00</p>
-                        </div>
-                    </a>
+            <a th:href="@{/games/{id}(id=${game.rawName})}" class="block">
+                <img th:src="${game.coverURL}" />
+                <div class="p-4">
+                    <h2 class="text-lg text-gray-300 font-semibold truncate" th:text="${game.name}">Game Title</h2>
+                    <p class="text-indigo-400 font-bold mt-1" th:text="${game.price}">€0.00</p>
                 </div>
-            </div>
+            </a>
+        </div>
+    </div>
 
-            <!-- Definimos dos controladores para ir a la página anterior o a la página siguiente. -->
-            <div class="flex justify-end sapce-x-3 mt-4 cursor-pointer">
-                <!-- Controlador/Botón para ir a la página anterior. -->
-                <a th:if="${previousPage != null}" th:href="@{/genres/previous}" class="flex items-center
+    <!-- Definimos dos controladores para ir a la página anterior o a la página siguiente. -->
+    <div class="flex justify-end sapce-x-3 mt-4 cursor-pointer">
+        <!-- Controlador/Botón para ir a la página anterior. -->
+        <a th:if="${previousPage != null}"
+           th:href="@{/genres/{genre}/previous(genre=${genreName})}" class="flex items-center
                 justify-center px-3 h-8 text-sm font-medium text-indigo-100 bg-[#2a475e] border border-gray-300 rounded-lg
                 hover:bg-[#2a475e] hover:text-indigo-300">
-                    <i class="fas fa-arrow-left me-2 rtl:rotate-180"></i>
-                    Previous
-                </a>
+            <i class="fas fa-arrow-left me-2 rtl:rotate-180"></i>
+            Previous
+        </a>
 
-                <!-- Controlador/Botón para ir a la página siguiente. -->
-                <a th:if="${nextPage != null}" th:href="@{/genres/next}" class="flex items-center
+        <!-- Controlador/Botón para ir a la página siguiente. -->
+        <a th:if="${nextPage != null}"
+           th:href="@{/genres/{genre}/next(genre=${genreName})}" class="flex items-center
                         justify-center px-3 h-8 text-sm font-medium text-indigo-100 bg-[#2a475e] border border-gray-300
                         rounded-lg hover:bg-[#2a475e] hover:text-indigo-300">
-                    Next
-                    <i class="fas fa-arrow-right ms-2 rtl:rotate-180"></i>
-                </a>
-            </div>
-        </div>
-    </body>
+            Next
+            <i class="fas fa-arrow-right ms-2 rtl:rotate-180"></i>
+        </a>
+    </div>
+</div>
+</body>
 </html>
