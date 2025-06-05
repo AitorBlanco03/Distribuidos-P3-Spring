@@ -1,0 +1,24 @@
+#
+# Dockerfile para construir el servicio encargado de lanzar y ejecutar
+# la API.
+#
+# Autor: Aitor Blanco Fernández, abf1005@abf1005@alu.ubu.es
+# Versión: 1.0.0, 30/05/2025
+#
+
+# Definimos una imagen base de Python 3.10 para ejecutar la API.
+FROM python:3.10-slim
+
+# Establecemos el directorio de trabajo dentro del contenedor de Docker.
+WORKDIR /app
+
+# Instalamos las dependencias usando como base los requirements definidos.
+COPY src/main/resources/flask-api/requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+# Copiamos el código fuente de la API para poder ejecutarla desde el contenedor.
+COPY src/main/resources/flask-api /app
+
+# Ejecutamos la API y exponemos el puerto 5000 donde la API comenzará a escuchar las peticiones.
+EXPOSE 5000
+CMD ["python", "run.py"]

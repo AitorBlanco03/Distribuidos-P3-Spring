@@ -1,0 +1,33 @@
+#
+# Dockerfile encargado de construir y ejecutar la aplicación web desarrollada
+# desde Spring Boot.
+#
+# Autor: Aitor Blanco Fernández, abf1005@alu.ubu.es
+# Versión: 1.0.0, 30/05/2025.
+#
+
+# Definimos una imagen base con Java 18 y Maven para construir la aplicación.
+FROM maven:3.8.5-openjdk-18 AS build
+
+# Establemos el directorio de trabajo dentro del contenedor de Docker.
+WORKDIR /app
+
+# Copiamos el código fuente necesario dentro de la aplicación para llegar a construirla.
+COPY pom.xml .
+COPY src ./src
+
+# Construimos la aplicación usando el pom.xml y lo empaquetamos en forma de JAR.
+# No ejecutaremos los tests para hacer más rápido la construcción de la aplicación.
+RUN mvn clean package -DskipTests
+
+# Definimos una nueva imagen para ejecutar la aplicación web.
+FROM openjdk:18-jdk-alpine
+
+# Mantenemos el directorio de trabajo dentro del contenedor de Docker.
+WORKDIR /app
+
+# Copiamos y ejecutamos la aplicación web desarrollada desde el JAR generado, exponiendo
+# en el proceso el puerto 8080.
+COPY --from=build /app/target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]

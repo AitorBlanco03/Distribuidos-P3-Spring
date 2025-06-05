@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+    <!--
+        Archivo que define la estructura, diseño e interfaz de carrito de
+        compras de la tienda.
+
+        Este carrito de la compra, permite ver los juegos seleccionado, junto a sus
+        correspondientes precios y el total a pagar. Además ofrece la posibilidad de
+        eliminar productos, regresar a la tienda o continuar con el pago.
+
+        Autor: Aitor Blanco Fernández, abf1005@alu.ubu.es
+        Version: 1.0.0, 02/06/2025
+    -->
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- CDN para usar los estilos y diseños de TailwindCSS sin necesidad de instalarlo. -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- CDN para usar los estilos y diseños de Font Awesome sin necesidad de instalarlo. -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    </head>
+
+    <body class="body-gray-100 text-gray-800">
+        <section class="w-full py-9 px-8">
+            <h1 class="text-center text-[32px] font-semibold leading-[38px]">My Shopping Cart</h1>
+
+            <!-- Definimos el carrito como una tabla de juegos y total. -->
+            <div class="flex flex-wrap items-start mt-8 gap-6">
+                <div class="bg-[#2a475e] p-4 w-full md:w-[800px] rounded-xl shadow">
+
+                    <table class="w-full rounded-xl">
+                        <thead>
+                            <!-- Definimos los encabezados de la tabla. -->
+                            <tr class="text-center border-b border-gray-300 text-gray-200 text-sm font-medium
+                            uppercase tracking-wide">
+                                <th class="text-left px-2 py-2">Game</th>
+                                <th class="px-2 py-2">Price</th>
+                                <!-- Columna para incluir el botón de eliminar dentro de la tabla. -->
+                                <th class="w-7 px-2 py-2"></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr class="text-center border-b border-gray-200">
+                                <!-- Definimos los campos que representan los juegos y su precio dentro del carrito. -->
+                                <td class="px-2 py-4 text-left">
+                                    <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg?t=1695270428"
+                                         class="w-35 h-20 inline-block mr-2" />
+                                    <span class="align-middle text-white">Hollow Knight</span>
+                                </td>
+                                <td class="px-2 py-4 text-white">$50.00</td>
+                                <!-- Campos vacios para mantener la estructura de la tabla. -->
+                                <td class="px-2 py-4"></td>
+                                <td class="px-2 py-4"></td>
+                                <!-- Definimos el icono que permite eliminar un juego del carrito. -->
+                                <td class="px-2 py-4">
+                                    <i class="fas fa-times-circle text-gray-300 hover:text-red-500 cursor-pointer text-xl"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                        <tfoot>
+                            <!-- Definimos un botón que nos permite volver atrás y seguir añadiendo juegos al carrito. -->
+                            <tr class="border-t border-gray-300">
+                                <td class="px-2 py-4" colspan="3"></td>
+                                <td class="px-2 py-4" colspan="2">
+                                    <button class="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full
+                                    text-sm font-semibold">Back</button>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <!-- Campo resumen para mostrar el precio total al usuario. -->
+                <div class="w-full md:w-[424px] bg-[#2a475e] rounded-lg p-6 shadow">
+                    <h2 class="text-xl font-medium mb-2 text-white">Cart Total</h2>
+
+                    <!-- Total a pagar por el usuario. -->
+                    <div class="py-3 flex justify-between text-white">
+                        <span>Total:</span>
+                        <span class="font-semibold">$50.00</span>
+                    </div>
+
+                    <!-- Botón para continuar y proceder con el pago. -->
+                    <button class="w-full text-white mt-5 px-10 py-4 bg-indigo-600 hover:bg-indigo-700
+                    rounded-full text-base font-semibold">
+                        Purchase
+                    </button>
+                </div>
+
+            </div>
+        </section>
+    </body>
+</html>
