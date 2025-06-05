@@ -47,6 +47,31 @@
       </li>
     </ul>
   </nav>
+
+  <!-- Menú del usuario activo en estos momentos. -->
+  <div class="relative flex items-center" th:if="${user != null}">
+    <!-- Icono del usuario. -->
+    <button id="user-menu-button" type="button"
+            class="flex text-sm bg-gray-800 rounded-full focus:ring-2 focus:ring-indigo-300">
+      <span class="sr-only">Abrir menú de usuario</span>
+      <img class="w-10 h-10 rounded-full" src="https://cdn-icons-png.flaticon.com/512/428/428573.png" />
+    </button>
+
+    <!-- Menú del usuario. -->
+    <div id="user-dropdown"
+         class="absolute right-0 mt-2 w-48 z-50 hidden text-base list-none bg-white divide-y divide-gray-100
+             rounded-lg shadow">
+      <ul class="py-2" aria-labelledby="user-menu-button">
+        <li>
+          <a th:href="@{/logout}"
+             class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </header>
 
 <!-- Información completa y disponible del juego dentro de la tienda. -->
@@ -161,5 +186,8 @@
 
 <!-- Referencia al módulo JS encargado de gestionar el contenido y mostrarlo al usuario. -->
 <script th:src="@{/js/game-media.js}"></script>
+
+<!-- Módulo JS para mostrar/ocultar el menú del usuario dentro del navbar. -->
+<script th:src="@{/js/user-dropdown.js}"></script>
 </body>
 </html>

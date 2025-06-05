@@ -93,4 +93,18 @@ public class AuthController {
         session.setAttribute("cart", new ShoppingCartDTO());
         return "redirect:/";
     }
+
+    /**
+     * Controla y gestiona el logout de un usuario dentro de la tienda.
+     *
+     * @return Nombre de la vista que se debe actualizar/renderizar por pantalla.
+     */
+    @GetMapping("/logout")
+    public String logOut(HttpSession session) {
+        // Eliminamos los datos de la sesión actual antes del logout.
+        session.invalidate();
+
+        // Redirigimos al usuario después del logout.
+        return "redirect:/";
+    }
 }

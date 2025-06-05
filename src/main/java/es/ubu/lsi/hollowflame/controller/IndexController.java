@@ -1,6 +1,8 @@
 package es.ubu.lsi.hollowflame.controller;
 
 import org.springframework.ui.ModelMap;
+import es.ubu.lsi.hollowflame.model.User;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ import java.util.List;
  * de acuerdo a los datos e información recibida por parte de la API.
  *
  * @author Aitor Blanco Fernández, abf1005@alu.ubu.es
- * @version 1.0.0, 30/05/2025.
+ * @version 1.1.0, 05/06/2025.
  */
 
 @Controller
@@ -37,7 +39,7 @@ public class IndexController {
      * información de acuerdo a los datos e información recibida por parte de la API.
      */
     @GetMapping("/")
-    public String showMainPage(ModelMap mainPage) {
+    public String showMainPage(ModelMap mainPage, HttpSession session) {
         try {
             // Obtenemos los datos de la vista a partir de la API del servicio.
             List<GameInfoDTO> latestReleases = latestReleasesService.getLatestReleases();
@@ -48,6 +50,11 @@ public class IndexController {
             mainPage.addAttribute("latestReleases", latestReleases);
             mainPage.addAttribute("userRecommendations", userRecommendations);
             mainPage.addAttribute("popularGames", popularGames);
+
+            // Obtenemos de la sesión, el usuario actual en estos momentos.
+            User user = (User) session.getAttribute("user");
+            mainPage.addAttribute("user", user);
+
             return "index";
         } catch (Exception e) {
             return "500-error";

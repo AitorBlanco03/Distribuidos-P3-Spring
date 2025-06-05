@@ -1,5 +1,7 @@
 package es.ubu.lsi.hollowflame.controller;
 
+import es.ubu.lsi.hollowflame.model.User;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,11 +32,15 @@ public class GameInfoController {
      * @return La vista de la página con los detalles del juego.
      */
     @GetMapping("/games/{gameID}")
-    public String showGameInfo(@PathVariable String gameID, ModelMap gameInfoPage) {
+    public String showGameInfo(@PathVariable String gameID, ModelMap gameInfoPage, HttpSession session) {
         try {
             // Obtenemos la información y los detalles del juego recibido.
             GameInfoDTO gameInfo = GameInfoService.getGameInfo(gameID);
             gameInfoPage.addAttribute("gameInfo", gameInfo);
+
+            // Obtenemos de la sesión, el usuario actual en estos momentos.
+            User user = (User) session.getAttribute("user");
+            gameInfoPage.addAttribute("user", user);
             return "game-info";
         } catch (Exception e) {
             return "404-error";

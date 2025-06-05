@@ -1,6 +1,8 @@
 package es.ubu.lsi.hollowflame.controller;
 
 import org.springframework.ui.ModelMap;
+import es.ubu.lsi.hollowflame.model.User;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,8 @@ public class ExploreGamesController {
      * @return Nombre de la página HTML que se debe de renderizar.
      */
     @GetMapping("/games")
-    public String showGamePage(@RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber, ModelMap exploreGamePage) {
+    public String showGamePage(@RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
+                               ModelMap exploreGamePage, HttpSession session) {
         try {
             // Actualizamos el contador asociado a la página actual.
             currentPage = pageNumber;
@@ -43,6 +46,11 @@ public class ExploreGamesController {
             exploreGamePage.addAttribute("previousPage", pageData.getPreviousPage());
             exploreGamePage.addAttribute("games", pageData.getGamesInfo());
             exploreGamePage.addAttribute("nextPage", pageData.getNextPage());
+
+            // Obtenemos de la sesión, el usuario actual en estos momentos.
+            User user = (User) session.getAttribute("user");
+            exploreGamePage.addAttribute("user", user);
+
             return "explore-games";
         } catch (Exception e) {
             return "500-error";
@@ -57,8 +65,8 @@ public class ExploreGamesController {
      *                        datos de la nueva página obtenida.
      */
     @GetMapping("/games/previous")
-    public String showPreviousPage(ModelMap exploreGamePage) {
-        return showGamePage(currentPage - 1, exploreGamePage);
+    public String showPreviousPage(ModelMap exploreGamePage, HttpSession session) {
+        return showGamePage(currentPage - 1, exploreGamePage, session);
     }
 
     /**
@@ -69,7 +77,7 @@ public class ExploreGamesController {
      *                        datos de la nueva página obtenida.
      */
     @GetMapping("/games/next")
-    public String showNextPage(ModelMap exploreGamePage) {
-        return showGamePage(currentPage + 1, exploreGamePage);
+    public String showNextPage(ModelMap exploreGamePage, HttpSession session) {
+        return showGamePage(currentPage + 1, exploreGamePage, session);
     }
 }
